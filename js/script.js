@@ -53,6 +53,11 @@ UI.prototype.deleteBook = function (tr) {
   }
 };
 
+document.querySelector("#book-list").addEventListener("click", (e) => {
+    const ui = new UI();
+    ui.deleteBook(e.target);
+});
+
 /* Event Listeners */
 document.getElementById("book-form").addEventListener("submit", (e) => {
   const title = document.getElementById("title").value,
@@ -67,8 +72,10 @@ document.getElementById("book-form").addEventListener("submit", (e) => {
   if (title === "" || author === "" || isbn === "") {
     ui.showAlert("Please fill in all fields!", "error");
   } else {
+    
     const book = new Book(title, author, isbn);
     const ui = new UI();
+   
     ui.addBookToList(book);
     ui.showAlert("Book added!", "success");
     ui.clearFields();
@@ -77,7 +84,3 @@ document.getElementById("book-form").addEventListener("submit", (e) => {
   e.preventDefault();
 });
 
-document.querySelector("#book-list").addEventListener("click", (e) => {
-    const ui = new UI();
-    ui.deleteBook(e.target);
-});
